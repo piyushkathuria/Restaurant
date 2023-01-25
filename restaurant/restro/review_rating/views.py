@@ -25,8 +25,9 @@ class ReviewRatingView(GenericAPIView):
 class GetReviewRating(GenericAPIView):
   serializer_class = ReviewRatingSerializer
   renderer_classes = [UserRenderer]
-  def get(self,request,id):
-    user = self.request.user
-    res = ReviewRating.objects.filter(user=user)
-    serializer = ReviewRatingSerializer(res,many=True)
-    return Response({'msg':"success","data":serializer.data}, status = 200)
+  def get(self,request):
+      if not self.request.user.is_authenticated:
+        return Response({'msg':'user not found'})
+      res = ReviewRating.objects.filter(user=self.request.user)
+      serializer = ReviewRatingSerializer(res,many=True)
+      return Response({'msg':"success","data":serializer.data}, status = 200)
