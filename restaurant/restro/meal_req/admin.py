@@ -11,7 +11,7 @@ admin.site.register(RequestMedicine, RequestMedicineAdmin)
 
 class OrderStatusAdmin(admin.ModelAdmin):
     fields = ['cart','store_info','status']
-    list_display = ('store_info', 'date', 'status')
+    list_display = ('cart','store_info', 'date', 'status')
 admin.site.register(OrderStatus, OrderStatusAdmin)
 
 
@@ -21,6 +21,5 @@ admin.site.register(StoreInfo, StoreInfoAdmin)
 
 
 class DeliveryBoyAdmin(admin.ModelAdmin):
-    fields= ['user','order']
-    list_display = ('user','date')
+    list_display = ('user','order','date')
 admin.site.register(DeliveryBoy,DeliveryBoyAdmin)

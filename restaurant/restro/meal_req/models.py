@@ -36,7 +36,7 @@ status = (
 
 # found,not_found,partially_found
 class OrderStatus(models.Model):
-    cart  = models.ManyToManyField(RequestMedicine,related_name='cart_id')
+    cart  = models.ForeignKey(RequestMedicine,on_delete=models.CASCADE)
     store_info = models.ForeignKey(StoreInfo,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=True)  
     status = models.CharField(max_length=100,choices=status,default="waiting_for_confirmation")
@@ -44,5 +44,5 @@ class OrderStatus(models.Model):
 
 class DeliveryBoy(models.Model):
     user =  models.ForeignKey(User,on_delete=models.CASCADE)
-    order = models.ManyToManyField(RequestMedicine,related_name='order_id')
+    order = models.ForeignKey(RequestMedicine,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=True)
